@@ -13,14 +13,16 @@ struct ProfileCreationView: View {
     var body: some View {
         VStack {
             header()
-            helpText()
+            helperText()
                 .padding(.bottom, 10)
             inputForm(placeholder: "First Name", text:                                $viewModel.user.name)
             inputForm(placeholder: "Email Address", text:                                $viewModel.user.email)
             inputForm(placeholder: "Password", text:                                $viewModel.user.password)
             inputForm(placeholder: "Website", text:                                $viewModel.user.website)
             Spacer()
-            submitButton()
+            BigRedButton(text: "Submit") {
+                viewModel.submitPressed()
+            }
         }
         .padding([.leading, .trailing], 12)
     }
@@ -41,39 +43,37 @@ struct ProfileCreationView: View {
             Spacer()
         }
     }
-    func helpText() -> some View {
+    func helperText() -> some View {
         HStack {
-            Text(viewModel.helpText)
+            Text(viewModel.helperText)
                 .font(.footnote)
                 .foregroundColor(.gray)
             Spacer()
         }
     }
-    func submitButton() -> some View {
-        Button(action: {
-            print("submit tapped")
-        }, label: {
-            HStack {
-                Spacer()
-                Text("Submit")
-                    .fontWeight(.semibold)
-                    .font(.callout)
-                Spacer()
-            }
-            .padding()
-            .foregroundColor(.white)
-            .background(.red)
-            .cornerRadius(15)
-        })
-    }
 }
 
 class ProfileCreationViewModel: ObservableObject {
     @Published var headerText = "Profile Creation"
-    @Published var helpText = "Use the form below to submit your portfolio.\nAn email and password are required."
+    @Published var helperText = "Use the form below to submit your portfolio.\nAn email and password are required."
     @Published var user: User
     init() {
         user = User(name: "", email: "", password: "", website: "")
+    }
+    func submitPressed() {
+        guard user.email.isValidEmail else {
+            print("email not valid")
+            return
+        }
+        if !user.email.isEmpty && !user.password.isEmpty {
+            print("valid profile creation")
+        } else {
+            print("not valid profile creation")
+        }
+    }
+    // TODO when I have more time, check if password is strong enough
+    func isPasswordStrong() -> Bool {
+        false
     }
 }
 
@@ -88,4 +88,17 @@ struct User {
     var email: String
     var password: String
     var website: String
+}
+
+fileprivate extension String {
+    var isValidEmail: Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: self)
+    }
+    var isValidWebsiteURL: Bool {
+        let websiteRegEx = "[A-Z0-9a-z._%+-]+\\.[A-Za-z]{2,64}"
+        let websitePred = NSPredicate(format:"SELF MATCHES %@", websiteRegEx)
+        return websitePred.evaluate(with: self)
+    }
 }

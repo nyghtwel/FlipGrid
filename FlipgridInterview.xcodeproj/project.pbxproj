@@ -15,6 +15,7 @@
 		D161919927B9E67D00E6B089 /* FlipgridInterviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161919827B9E67D00E6B089 /* FlipgridInterviewUITests.swift */; };
 		D161919B27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161919A27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift */; };
 		D16191A827B9E6B900E6B089 /* ProfileCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */; };
+		D16191AA27B9F53100E6B089 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191A927B9F53100E6B089 /* ConfirmationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		D161919827B9E67D00E6B089 /* FlipgridInterviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipgridInterviewUITests.swift; sourceTree = "<group>"; };
 		D161919A27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipgridInterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreationView.swift; sourceTree = "<group>"; };
+		D16191A927B9F53100E6B089 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */,
 				D161918127B9E67D00E6B089 /* Assets.xcassets */,
 				D161918327B9E67D00E6B089 /* Preview Content */,
+				D16191A927B9F53100E6B089 /* ConfirmationView.swift */,
 			);
 			path = FlipgridInterview;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D16191A827B9E6B900E6B089 /* ProfileCreationView.swift in Sources */,
+				D16191AA27B9F53100E6B089 /* ConfirmationView.swift in Sources */,
 				D161918027B9E67C00E6B089 /* ContentView.swift in Sources */,
 				D161917E27B9E67C00E6B089 /* FlipgridInterviewApp.swift in Sources */,
 			);
