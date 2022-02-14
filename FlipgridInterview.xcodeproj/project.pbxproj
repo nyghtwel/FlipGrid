@@ -14,6 +14,7 @@
 		D161918F27B9E67D00E6B089 /* FlipgridInterviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161918E27B9E67D00E6B089 /* FlipgridInterviewTests.swift */; };
 		D161919927B9E67D00E6B089 /* FlipgridInterviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161919827B9E67D00E6B089 /* FlipgridInterviewUITests.swift */; };
 		D161919B27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161919A27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift */; };
+		D16191A827B9E6B900E6B089 /* ProfileCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		D161919427B9E67D00E6B089 /* FlipgridInterviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipgridInterviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D161919827B9E67D00E6B089 /* FlipgridInterviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipgridInterviewUITests.swift; sourceTree = "<group>"; };
 		D161919A27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipgridInterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				D161917D27B9E67C00E6B089 /* FlipgridInterviewApp.swift */,
 				D161917F27B9E67C00E6B089 /* ContentView.swift */,
+				D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */,
 				D161918127B9E67D00E6B089 /* Assets.xcassets */,
 				D161918327B9E67D00E6B089 /* Preview Content */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D16191A827B9E6B900E6B089 /* ProfileCreationView.swift in Sources */,
 				D161918027B9E67C00E6B089 /* ContentView.swift in Sources */,
 				D161917E27B9E67C00E6B089 /* FlipgridInterviewApp.swift in Sources */,
 			);
