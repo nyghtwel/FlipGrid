@@ -82,21 +82,6 @@ struct ConfirmationView: View {
     }
 }
 
-class ConfirmationViewModel: ObservableObject {
-    @Published var headerText = ""
-    @Published var helperText = "Your super-awesome portfolio has been successfully submitted! The details below will be public within your community!"
-    @Published var user: User
-    
-    init(user: User) {
-        self.user = user
-        headerText = user.name.isEmpty ? "Hello!" : "Hello, \(user.name)!"
-    }
-    
-    func signInPressed() {
-        print("sign in pressed")
-    }
-}
-
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmationView(viewModel: ConfirmationViewModel(user: User(name: "", email: "scdsc", password: "scadc", website: "google.com")))

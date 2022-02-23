@@ -97,63 +97,6 @@ struct ProfileCreationView: View {
     }
 }
 
-class ProfileCreationViewModel: ObservableObject {
-    @Published var headerText = "Profile Creation"
-    @Published var helperText = "Use the form below to submit your portfolio.\nAn email and password are required."
-    @Published var user: User
-    @Published var showConfirmation = false
-    @Published var isShowingInvalidEmailError = false
-    @Published var isShowingEmptyEmailError = false
-    @Published var isShowingEmptyPasswordError = false
-    @Published var errorSet = Set<ProfileCreationError>()
-    
-    enum ProfileCreationError: Error {
-        case invalidEmail
-        case missingEmail
-        case missingPassword
-        var errorMessage: String {
-            switch self {
-            case .invalidEmail:  return "Invalid Email"
-            case .missingEmail:  return "Email Required"
-            case .missingPassword:  return "Password Required"
-            }
-        }
-    }
-    
-    init() {
-        user = User(name: "", email: "", password: "", website: "")
-    }
-    
-    func submitPressed() {
-        resetErrors()
-        if user.email.isEmpty {
-            isShowingEmptyEmailError = true
-        } else if !user.email.isValidEmail {
-            isShowingInvalidEmailError = true
-        }
-        if user.password.isEmpty {
-            isShowingEmptyPasswordError = true
-        }
-        guard errorSet.isEmpty else { return }
-        if user.isValidUser {
-            showConfirmation = true
-            print("valid profile creation")
-        } else {
-            print("not valid profile creation")
-        }
-    }
-    
-    private func resetErrors() {
-        isShowingEmptyEmailError = false
-        isShowingInvalidEmailError = false
-        isShowingEmptyPasswordError = false
-    }
-    // TODO when I have more time, check if password is strong enough
-    func isPasswordStrong() -> Bool {
-        false
-    }
-}
-
 struct ProfileCreationView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileCreationView()
