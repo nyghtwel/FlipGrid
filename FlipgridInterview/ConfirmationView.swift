@@ -10,13 +10,19 @@ import SwiftUI
 
 struct ConfirmationView: View {
     @StateObject var viewModel: ConfirmationViewModel
+    @Environment(\.presentationMode) var presentation
     var body: some View {
         VStack(spacing: 8) {
             header()
             helperText()
             VStack(alignment: .center, spacing: 4) {
-                if !viewModel.user.website.isEmpty {
-                    body(viewModel.user.website)
+                if !viewModel.user.website.isEmpty, let url = uRLCheck(viewModel.user.website) {
+                    Link(destination: url) {
+                        Text(viewModel.user.website)
+                            .foregroundColor(.blue)
+                            .underline()
+                            .font(.footnote)
+                    }
                 }
                 if !viewModel.user.name.isEmpty {
                     body(viewModel.user.name)
@@ -27,11 +33,19 @@ struct ConfirmationView: View {
             }
             Spacer()
             BigRedButton(text: "Sign In") {
-                viewModel.signInPressed()
+                // pop back to profile creation since sign-in does not require any func
+                presentation.wrappedValue.dismiss()
             }
         }
+        .navigationBarHidden(true)
         .padding([.leading, .trailing], 10)
     }
+    
+    // recreate URL if string is missing http://
+    func uRLCheck(_ url: String) -> URL {
+        !url.hasPrefix("http://") ? URL(string: "http://\(url)")! : URL(string: url)!
+    }
+    
     func header() -> some View {
         HStack {
             Text(viewModel.headerText)
@@ -41,6 +55,7 @@ struct ConfirmationView: View {
             Spacer()
         }
     }
+    
     func helperText() -> some View {
         HStack {
             Text(viewModel.helperText)
@@ -49,9 +64,21 @@ struct ConfirmationView: View {
             Spacer()
         }
     }
+    
     func body(_ text: String) -> some View {
-        Text(text)
-            .font(.footnote)
+        VStack {
+            if text.isValidURL {
+                Link(destination: URL(string: text)!) {
+                    Text(text)
+                        .foregroundColor(.blue)
+                        .underline()
+                        .font(.footnote)
+                }
+            } else {
+                Text(text)
+                    .font(.footnote)
+            }
+        }
     }
 }
 
@@ -59,10 +86,12 @@ class ConfirmationViewModel: ObservableObject {
     @Published var headerText = ""
     @Published var helperText = "Your super-awesome portfolio has been successfully submitted! The details below will be public within your community!"
     @Published var user: User
+    
     init(user: User) {
         self.user = user
         headerText = user.name.isEmpty ? "Hello!" : "Hello, \(user.name)!"
     }
+    
     func signInPressed() {
         print("sign in pressed")
     }
@@ -70,32 +99,6 @@ class ConfirmationViewModel: ObservableObject {
 
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView(viewModel: ConfirmationViewModel(user: User(name: "", email: "scdsc", password: "scadc", website: "adcs.com")))
-    }
-}
-
-struct BigRedButton: View {
-    private var action: () -> Void
-    private var text: String
-    init(text: String, action: @escaping () -> Void) {
-        self.action = action
-        self.text = text
-    }
-    var body: some View {
-        Button(action: {
-            action()
-        }, label: {
-            HStack {
-                Spacer()
-                Text(text)
-                    .fontWeight(.semibold)
-                    .font(.callout)
-                Spacer()
-            }
-            .padding()
-            .foregroundColor(.white)
-            .background(.red)
-            .cornerRadius(15)
-        })
+        ConfirmationView(viewModel: ConfirmationViewModel(user: User(name: "", email: "scdsc", password: "scadc", website: "google.com")))
     }
 }

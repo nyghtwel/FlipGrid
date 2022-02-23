@@ -9,28 +9,54 @@ import XCTest
 @testable import FlipgridInterview
 
 class FlipgridInterviewTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func testEmptyUser() throws {
+        let user = User(name: "", email: "", password: "", website: "")
+        XCTAssertEqual(user.isValidUser, false)
+    }
+    
+    func testUserValidEmail() throws {
+        let user = User(name: "", email: "valid@gmail.com", password: "", website: "")
+        XCTAssertEqual(user.hasEmailError, false)
+    }
+    
+    func testUserInvalidEmail() throws {
+        let user = User(name: "", email: "not an email", password: "", website: "")
+        XCTAssertEqual(user.hasEmailError, true)
+    }
+    
+    func testValidUser() throws {
+        let user = User(name: "", email: "valid@gmail.com", password: "password", website: "")
+        XCTAssertEqual(user.isValidUser, true)
+    }
+    
+    func testInvalidUserPassword() throws {
+        let user = User(name: "", email: "", password: "", website: "")
+        XCTAssertEqual(user.hasPasswordError, true)
+    }
+    
+    func testValidUserPassword() throws {
+        let user = User(name: "", email: "", password: "password", website: "")
+        XCTAssertEqual(user.hasPasswordError, false)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testInvalidProfileCreationUser() throws {
+        let vm = ProfileCreationViewModel()
+        vm.user = User(name: "", email: "", password: "", website: "")
+        vm.submitPressed()
+        XCTAssertEqual(vm.isShowingEmptyPasswordError, true)
+        XCTAssertEqual(vm.isShowingEmptyEmailError, true)
+        XCTAssertEqual(vm.isShowingInvalidEmailError, false)
+        XCTAssertEqual(vm.showConfirmation, false)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testValidProfileCreationUser() throws {
+        let vm = ProfileCreationViewModel()
+        vm.user = User(name: "", email: "email@gmail.com", password: "password", website: "")
+        vm.submitPressed()
+        XCTAssertEqual(vm.isShowingEmptyPasswordError, false)
+        XCTAssertEqual(vm.isShowingEmptyEmailError, false)
+        XCTAssertEqual(vm.isShowingInvalidEmailError, false)
+        XCTAssertEqual(vm.showConfirmation, true)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

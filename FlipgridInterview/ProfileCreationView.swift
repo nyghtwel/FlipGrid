@@ -15,25 +15,68 @@ struct ProfileCreationView: View {
             header()
             helperText()
                 .padding(.bottom, 10)
-            inputForm(placeholder: "First Name", text:                                $viewModel.user.name)
-            inputForm(placeholder: "Email Address", text:                                $viewModel.user.email)
-            inputForm(placeholder: "Password", text:                                $viewModel.user.password)
-            inputForm(placeholder: "Website", text:                                $viewModel.user.website)
+            Group {
+                inputForm(placeholder: "First Name", text: $viewModel.user.name)
+                inputForm(
+                    placeholder: "Email Address",
+                    text: $viewModel.user.email,
+                    hasError: viewModel.isShowingEmptyEmailError || viewModel.isShowingInvalidEmailError
+                )
+                if viewModel.isShowingEmptyEmailError {
+                    errorMessage(error: .missingEmail)
+                }
+                if viewModel.isShowingInvalidEmailError {
+                    errorMessage(error: .invalidEmail)
+                }
+                inputForm(
+                    placeholder: "Password",
+                    text: $viewModel.user.password,
+                    hasError: viewModel.isShowingEmptyPasswordError
+                )
+                if viewModel.isShowingEmptyPasswordError {
+                    errorMessage(error: .missingPassword)
+                }
+                inputForm(placeholder: "Website", text: $viewModel.user.website)
+            }
             Spacer()
             BigRedButton(text: "Submit") {
                 viewModel.submitPressed()
             }
+            NavigationLink(
+                isActive: $viewModel.showConfirmation,
+                destination: { ConfirmationView(viewModel: ConfirmationViewModel(user: viewModel.user)) },
+                label: { EmptyView() }
+            )
         }
-        .padding([.leading, .trailing], 12)
+        .navigationBarHidden(true)
+        .padding([.leading, .trailing], 15)
     }
-    func inputForm(placeholder: String, text: Binding<String>) -> some View {
+    
+    func inputForm(placeholder: String, text: Binding<String>, hasError: Bool = false) -> some View {
         VStack {
             TextField(placeholder, text: text)
                 .font(.footnote)
+                .disableAutocorrection(true)
+                .autocapitalization(.none)
         }
         .padding()
-        .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black, style: StrokeStyle(lineWidth: 1.0)))
+        .overlay(
+            RoundedRectangle(cornerRadius: 10.0)
+                .strokeBorder(hasError ? .red : .black, style: StrokeStyle(lineWidth: 1.0))
+        )
     }
+    
+    func errorMessage(error: ProfileCreationViewModel.ProfileCreationError) -> some View {
+        HStack {
+            Text(error.errorMessage)
+                .font(.caption)
+                .foregroundColor(.red)
+                .italic()
+            Spacer()
+        }
+        .padding(.leading, 10)
+    }
+    
     func header() -> some View {
         HStack {
             Text(viewModel.headerText)
@@ -43,6 +86,7 @@ struct ProfileCreationView: View {
             Spacer()
         }
     }
+    
     func helperText() -> some View {
         HStack {
             Text(viewModel.helperText)
@@ -57,19 +101,52 @@ class ProfileCreationViewModel: ObservableObject {
     @Published var headerText = "Profile Creation"
     @Published var helperText = "Use the form below to submit your portfolio.\nAn email and password are required."
     @Published var user: User
+    @Published var showConfirmation = false
+    @Published var isShowingInvalidEmailError = false
+    @Published var isShowingEmptyEmailError = false
+    @Published var isShowingEmptyPasswordError = false
+    @Published var errorSet = Set<ProfileCreationError>()
+    
+    enum ProfileCreationError: Error {
+        case invalidEmail
+        case missingEmail
+        case missingPassword
+        var errorMessage: String {
+            switch self {
+            case .invalidEmail:  return "Invalid Email"
+            case .missingEmail:  return "Email Required"
+            case .missingPassword:  return "Password Required"
+            }
+        }
+    }
+    
     init() {
         user = User(name: "", email: "", password: "", website: "")
     }
+    
     func submitPressed() {
-        guard user.email.isValidEmail else {
-            print("email not valid")
-            return
+        resetErrors()
+        if user.email.isEmpty {
+            isShowingEmptyEmailError = true
+        } else if !user.email.isValidEmail {
+            isShowingInvalidEmailError = true
         }
-        if !user.email.isEmpty && !user.password.isEmpty {
+        if user.password.isEmpty {
+            isShowingEmptyPasswordError = true
+        }
+        guard errorSet.isEmpty else { return }
+        if user.isValidUser {
+            showConfirmation = true
             print("valid profile creation")
         } else {
             print("not valid profile creation")
         }
+    }
+    
+    private func resetErrors() {
+        isShowingEmptyEmailError = false
+        isShowingInvalidEmailError = false
+        isShowingEmptyPasswordError = false
     }
     // TODO when I have more time, check if password is strong enough
     func isPasswordStrong() -> Bool {
@@ -80,25 +157,5 @@ class ProfileCreationViewModel: ObservableObject {
 struct ProfileCreationView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileCreationView()
-    }
-}
-
-struct User {
-    var name: String
-    var email: String
-    var password: String
-    var website: String
-}
-
-fileprivate extension String {
-    var isValidEmail: Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: self)
-    }
-    var isValidWebsiteURL: Bool {
-        let websiteRegEx = "[A-Z0-9a-z._%+-]+\\.[A-Za-z]{2,64}"
-        let websitePred = NSPredicate(format:"SELF MATCHES %@", websiteRegEx)
-        return websitePred.evaluate(with: self)
     }
 }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D161917E27B9E67C00E6B089 /* FlipgridInterviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161917D27B9E67C00E6B089 /* FlipgridInterviewApp.swift */; };
-		D161918027B9E67C00E6B089 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161917F27B9E67C00E6B089 /* ContentView.swift */; };
 		D161918227B9E67D00E6B089 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D161918127B9E67D00E6B089 /* Assets.xcassets */; };
 		D161918527B9E67D00E6B089 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D161918427B9E67D00E6B089 /* Preview Assets.xcassets */; };
 		D161918F27B9E67D00E6B089 /* FlipgridInterviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161918E27B9E67D00E6B089 /* FlipgridInterviewTests.swift */; };
@@ -16,6 +15,9 @@
 		D161919B27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161919A27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift */; };
 		D16191A827B9E6B900E6B089 /* ProfileCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */; };
 		D16191AA27B9F53100E6B089 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191A927B9F53100E6B089 /* ConfirmationView.swift */; };
+		D16191AC27BA0EFB00E6B089 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191AB27BA0EFB00E6B089 /* String+Extensions.swift */; };
+		D16191AE27BA0F5500E6B089 /* Custom Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191AD27BA0F5500E6B089 /* Custom Views.swift */; };
+		D16191B027BA101C00E6B089 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16191AF27BA101C00E6B089 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 /* Begin PBXFileReference section */
 		D161917A27B9E67C00E6B089 /* FlipgridInterview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipgridInterview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D161917D27B9E67C00E6B089 /* FlipgridInterviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipgridInterviewApp.swift; sourceTree = "<group>"; };
-		D161917F27B9E67C00E6B089 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D161918127B9E67D00E6B089 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D161918427B9E67D00E6B089 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D161918A27B9E67D00E6B089 /* FlipgridInterviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipgridInterviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +49,9 @@
 		D161919A27B9E67D00E6B089 /* FlipgridInterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipgridInterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreationView.swift; sourceTree = "<group>"; };
 		D16191A927B9F53100E6B089 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		D16191AB27BA0EFB00E6B089 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		D16191AD27BA0F5500E6B089 /* Custom Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Views.swift"; sourceTree = "<group>"; };
+		D16191AF27BA101C00E6B089 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,11 +103,13 @@
 			isa = PBXGroup;
 			children = (
 				D161917D27B9E67C00E6B089 /* FlipgridInterviewApp.swift */,
-				D161917F27B9E67C00E6B089 /* ContentView.swift */,
 				D16191A727B9E6B900E6B089 /* ProfileCreationView.swift */,
+				D16191A927B9F53100E6B089 /* ConfirmationView.swift */,
+				D16191AB27BA0EFB00E6B089 /* String+Extensions.swift */,
+				D16191AD27BA0F5500E6B089 /* Custom Views.swift */,
+				D16191AF27BA101C00E6B089 /* User.swift */,
 				D161918127B9E67D00E6B089 /* Assets.xcassets */,
 				D161918327B9E67D00E6B089 /* Preview Content */,
-				D16191A927B9F53100E6B089 /* ConfirmationView.swift */,
 			);
 			path = FlipgridInterview;
 			sourceTree = "<group>";
@@ -263,9 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D16191AC27BA0EFB00E6B089 /* String+Extensions.swift in Sources */,
 				D16191A827B9E6B900E6B089 /* ProfileCreationView.swift in Sources */,
+				D16191B027BA101C00E6B089 /* User.swift in Sources */,
+				D16191AE27BA0F5500E6B089 /* Custom Views.swift in Sources */,
 				D16191AA27B9F53100E6B089 /* ConfirmationView.swift in Sources */,
-				D161918027B9E67C00E6B089 /* ContentView.swift in Sources */,
 				D161917E27B9E67C00E6B089 /* FlipgridInterviewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

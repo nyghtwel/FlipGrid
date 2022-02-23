@@ -11,7 +11,9 @@ import SwiftUI
 struct FlipgridInterviewApp: App {
     var body: some Scene {
         WindowGroup {
-            ProfileCreationView()
+            NavigationView {
+                ProfileCreationView()
+            }
         }
     }
 }
